@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { fetchPokemons } from "./functions/fetchPokemons";
 
 function Card() {
   return (
@@ -12,9 +13,13 @@ function Card() {
 }
 
 function CardsContainer() {
-  [selected, setSelected] = useState([]);
-  [currentScore, setCurrentScore] = useState(0);
-  [bestScore, setBestScore] = useState(0);
+  useEffect(() => {
+    fetchPokemons();
+  });
+  const [selected, setSelected] = useState([]);
+  const [currentScore, setCurrentScore] = useState(0);
+  const [bestScore, setBestScore] = useState(0);
 
   return <div className="cards-grid"></div>;
 }
+export default CardsContainer;
