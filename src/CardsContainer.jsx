@@ -2,14 +2,13 @@ import { useEffect, useState } from "react";
 import { fetchPokemons } from "./functions/fetchPokemons";
 
 function Card({ pokemon }) {
-  console.log({ pokemon });
   return (
     <div className="card-container">
       <div className="wrapper">
-        <div className="card-img-container">{pokemon.pokeName}</div>
-        <div className="card-pk-name">
+        <div className="card-img-container">
           <img src={pokemon.image} alt="pokemon" />
         </div>
+        <div className="card-pk-name"> {pokemon.pokeName}</div>
       </div>
     </div>
   );
