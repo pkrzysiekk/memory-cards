@@ -1,21 +1,55 @@
+:root {
+  --light-blue: #3466af;
+  --deft-blue: #21386e;
+  --dark-blue: #1d2c5e;
+  --dark-yellow: #ffcb05;
+  --neon-gold: #c7a008;
+  --poke-red: #ff0000;
+}
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
+body {
+  background-color: var(--deft-blue);
+}
+@font-face {
+  font-family: "PokeFont";
+  src: url("./assets/fonts/pokeFont.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
 .cards-grid {
   display: grid;
+  row-gap: 1rem;
+  column-gap: 3.5rem;
   justify-content: center;
   grid-template-columns: repeat(4, clamp(100px, 250px, 500px));
 }
 .wrapper {
   display: grid;
+  border: 3px solid;
+  border-color: var(--light-blue);
+  font-family: PokeFont;
+  justify-items: center;
+  background-color: var(--neon-gold);
 }
 .card-img-container {
-  max-width: clamp(100px, 200px, 450px);
+  max-width: clamp(100px, 250px, 450px);
 }
 .card-img-container img {
   object-fit: contain;
   max-width: 100%;
   max-height: 100%;
+}
+.card-pk-name {
+  font-size: clamp(1rem, 1.2rem, 3rem);
+  padding: 1rem;
+  min-height: 6%;
+  color: var(--deft-blue);
+}
+.wrapper:hover {
+  box-shadow: 0px 0px 26px 10px var(--poke-red);
+  cursor: pointer;
 }
