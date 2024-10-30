@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { fetchPokemons } from "./functions/fetchPokemons";
 
-function Card({ pokemon }) {
+function Card({ pokemon, onClick }) {
   return (
-    <div className="card-container">
+    <div className="card-container" onClick={() => onClick(pokemon.id)}>
       <div className="wrapper">
         <div className="card-img-container">
           <img src={pokemon.image} alt="pokemon" />
@@ -15,22 +15,40 @@ function Card({ pokemon }) {
 }
 
 function CardsContainer() {
+  let [selected, setSelected] = useState([]);
+  let [pokemons, setPokemons] = useState([]);
+  let [currentScore, setCurrentScore] = useState(0);
+  let [bestScore, setBestScore] = useState(0);
+
+  const handleClick = (pokemonID) => {
+    if (!selected.includes(pokemonID)) {
+      setCurrentScore((prevScore) => prevScore + 1);
+      currentScore > bestScore ? setBestScore(currentScore) : null;
+      setSelected([...selected, pokemonID]);
+    } else {
+      setCurrentScore(0);
+      setSelected([]);
+    }
+    console.log(`current ${currentScore} best ${bestScore}`);
+    console.log(selected);
+  };
+
   useEffect(() => {
     const fetchAndSetPokemons = async () => {
       const Pokemons = await fetchPokemons();
       setPokemons(Pokemons);
     };
     fetchAndSetPokemons();
-  }, []);
-  const [selected, setSelected] = useState([]);
-  const [pokemons, setPokemons] = useState([]);
-  const [currentScore, setCurrentScore] = useState(0);
-  const [bestScore, setBestScore] = useState(0);
+  }, [selected]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [selected]);
 
   return (
     <div className="cards-grid">
       {pokemons.map((pokemon) => (
-        <Card key={pokemon.reactID} pokemon={pokemon} />
+        <Card key={pokemon.reactID} pokemon={pokemon} onClick={handleClick} />
       ))}
     </div>
   );
