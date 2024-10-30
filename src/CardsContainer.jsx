@@ -16,8 +16,8 @@ function Card({ pokemon, onClick }) {
 function Score(scores) {
   return (
     <div className="score-section">
-      <p className="best-score">Best: {scores.bestScore} </p>
-      <p className="current-score">Current: {scores.currentScore}</p>
+      <p className="best-score">Best Score: {scores.bestScore} </p>
+      <p className="current-score">Score: {scores.currentScore}</p>
     </div>
   );
 }
@@ -56,12 +56,22 @@ function CardsContainer() {
 
   return (
     <>
+      <header>
+        <div className="title">
+          <h1>PokeMemo!</h1>
+        </div>
+        <div className="subtitle">
+          <h3>
+            Test your memory and try to remember as many Pokemons as possible!
+          </h3>
+        </div>
+        <Score bestScore={bestScore} currentScore={currentScore} />
+      </header>
       <div className="cards-grid">
         {pokemons.map((pokemon) => (
           <Card key={pokemon.reactID} pokemon={pokemon} onClick={handleClick} />
         ))}
       </div>
-      <Score bestScore={bestScore} currentScore={currentScore} />
     </>
   );
 }
