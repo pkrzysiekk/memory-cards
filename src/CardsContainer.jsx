@@ -13,6 +13,14 @@ function Card({ pokemon, onClick }) {
     </div>
   );
 }
+function Score(scores) {
+  return (
+    <div className="score-section">
+      <p className="best-score">Best: {scores.bestScore} </p>
+      <p className="current-score">Current: {scores.currentScore}</p>
+    </div>
+  );
+}
 
 function CardsContainer() {
   let [selected, setSelected] = useState([]);
@@ -23,7 +31,7 @@ function CardsContainer() {
   const handleClick = (pokemonID) => {
     if (!selected.includes(pokemonID)) {
       setCurrentScore((prevScore) => prevScore + 1);
-      currentScore > bestScore ? setBestScore(currentScore) : null;
+
       setSelected([...selected, pokemonID]);
     } else {
       setCurrentScore(0);
@@ -42,15 +50,19 @@ function CardsContainer() {
   }, [selected]);
 
   useEffect(() => {
+    currentScore > bestScore ? setBestScore(currentScore) : null;
     window.scrollTo(0, 0);
   }, [selected]);
 
   return (
-    <div className="cards-grid">
-      {pokemons.map((pokemon) => (
-        <Card key={pokemon.reactID} pokemon={pokemon} onClick={handleClick} />
-      ))}
-    </div>
+    <>
+      <div className="cards-grid">
+        {pokemons.map((pokemon) => (
+          <Card key={pokemon.reactID} pokemon={pokemon} onClick={handleClick} />
+        ))}
+      </div>
+      <Score bestScore={bestScore} currentScore={currentScore} />
+    </>
   );
 }
 export default CardsContainer;
