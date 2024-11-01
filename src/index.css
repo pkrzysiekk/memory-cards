@@ -49,7 +49,7 @@ header {
 }
 .cards-grid {
   display: grid;
-  row-gap: 1rem;
+  row-gap: 1.5rem;
   column-gap: 3rem;
   grid-template-columns: repeat(4, minmax(200px, 0.8fr));
   padding: 1rem 2rem;
@@ -63,6 +63,7 @@ header {
   font-family: PokeFont;
   justify-items: center;
   background-color: var(--neon-gold);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 .card-img-container {
   max-width: clamp(100px, 250px, 450px);
@@ -80,5 +81,6 @@ header {
 }
 .wrapper:hover {
   box-shadow: 0px 0px 26px 10px var(--poke-red);
+  transform: translateY(-10px);
   cursor: pointer;
 }
