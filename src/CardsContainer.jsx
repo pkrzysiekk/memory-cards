@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchPokemons } from "./functions/fetchPokemons";
+import { UPPER_POKEMON_ID } from "./functions/getRandomPokemonID";
 
 function Card({ pokemon, onClick }) {
   return (
@@ -18,6 +19,7 @@ function Score(scores) {
     <div className="score-section">
       <p className="best-score">Best Score: {scores.bestScore} </p>
       <p className="current-score">Score: {scores.currentScore}</p>
+      <p className="max-score">Max possible score:{UPPER_POKEMON_ID}</p>
     </div>
   );
 }
@@ -67,11 +69,22 @@ function CardsContainer() {
         </div>
         <Score bestScore={bestScore} currentScore={currentScore} />
       </header>
-      <div className="cards-grid">
-        {pokemons.map((pokemon) => (
-          <Card key={pokemon.reactID} pokemon={pokemon} onClick={handleClick} />
-        ))}
-      </div>
+      {currentScore !== UPPER_POKEMON_ID && (
+        <div className="cards-grid">
+          {pokemons.map((pokemon) => (
+            <Card
+              key={pokemon.reactID}
+              pokemon={pokemon}
+              onClick={handleClick}
+            />
+          ))}
+        </div>
+      )}
+      {currentScore == UPPER_POKEMON_ID && (
+        <div className="winner-info">
+          <p className="winner-score">You won!</p>
+        </div>
+      )}
     </>
   );
 }

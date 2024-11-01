@@ -84,3 +84,10 @@ header {
   transform: translateY(-10px);
   cursor: pointer;
 }
+.winner-info {
+  display: flex;
+  justify-content: center;
+  color: var(--light-blue);
+  font-family: PokeFont;
+  font-size: 5rem;
+}
