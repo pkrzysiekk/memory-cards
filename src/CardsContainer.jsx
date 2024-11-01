@@ -36,11 +36,23 @@ function CardsContainer() {
 
       setSelected([...selected, pokemonID]);
     } else {
-      setCurrentScore(0);
-      setSelected([]);
+      loseGame();
     }
     console.log(`current ${currentScore} best ${bestScore}`);
     console.log(selected);
+  };
+
+  const handleCheck = () => {
+    if (pokemons.every((pokemon) => selected.includes(pokemon))) {
+      setCurrentScore((prevScore) => prevScore + 1);
+    } else {
+      loseGame();
+    }
+  };
+
+  const loseGame = () => {
+    setCurrentScore(0);
+    setSelected([]);
   };
 
   useEffect(() => {
@@ -49,12 +61,12 @@ function CardsContainer() {
       setPokemons(Pokemons);
     };
     fetchAndSetPokemons();
-  }, [selected]);
+  }, [selected, currentScore]);
 
   useEffect(() => {
     currentScore > bestScore ? setBestScore(currentScore) : null;
     window.scrollTo(0, 0);
-  }, [selected]);
+  }, [selected, currentScore]);
 
   return (
     <>
@@ -66,6 +78,13 @@ function CardsContainer() {
           <h3>
             Test your memory and try to remember as many Pokemons as possible!
           </h3>
+        </div>
+        <div className="button-container">
+          {currentScore != UPPER_POKEMON_ID && (
+            <button className="check-button" onClick={handleCheck}>
+              All Pokemons repeated!
+            </button>
+          )}
         </div>
         <Score bestScore={bestScore} currentScore={currentScore} />
       </header>

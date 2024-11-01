@@ -11,6 +11,12 @@
   margin: 0;
   box-sizing: border-box;
 }
+@font-face {
+  font-family: "PokeFont";
+  src: url("./assets/fonts/pokeFont.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
 
 body {
   font-family: serif;
@@ -20,6 +26,7 @@ header {
   display: grid;
   padding: 1rem 2rem;
   grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
 }
 .title {
   font-size: clamp(1rem, 2.5rem, 3rem);
@@ -41,12 +48,27 @@ header {
   color: var(--light-blue);
   font-family: PokeFont;
 }
-@font-face {
-  font-family: "PokeFont";
-  src: url("./assets/fonts/pokeFont.woff2") format("woff2");
-  font-weight: normal;
-  font-style: normal;
+.button-container {
+  grid-column: 2/2;
+  grid-row: 3/4;
+  justify-self: end;
+  padding: 1rem;
 }
+.check-button {
+  width: 8rem;
+  height: 3rem;
+  padding: 0.4rem;
+  background-color: inherit;
+  border: 2px solid var(--light-blue);
+  transition: border-bottom 0.1s linear;
+
+  will-change: transform;
+}
+.check-button:hover {
+  transform: scale(1.2);
+  border-bottom: 3px solid var(--poke-red);
+}
+
 .cards-grid {
   display: grid;
   row-gap: 1.5rem;
